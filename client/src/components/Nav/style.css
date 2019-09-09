@@ -1,0 +1,16 @@
+.navbar {
+    margin-left: 2%;
+}
+
+h3 {
+    display: inline-block;
+    font-size: 25px;
+}
+
+a {
+    padding-left: 3%;
+}
+ 
+.Nav-box {
+    border-bottom: 2px solid black;
+}

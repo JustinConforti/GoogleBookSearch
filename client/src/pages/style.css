@@ -1,0 +1,22 @@
+
+.container-booksearch {
+    border-style:solid;
+    border-width: 1px;
+    width: 85.5%;
+    margin: 0 auto;
+}
+
+.book-input {
+    width: 50%;
+    margin-bottom:5%;
+    margin-left: 5%;
+    margin-top:2%;
+}
+
+.container-bookList {
+    float:right;
+    border-style:solid;
+    border-width: 1px;
+    height:50%;
+    margin: 0 auto;
+}
