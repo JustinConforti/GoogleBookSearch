@@ -1,6 +1,7 @@
 import React from "react";
 import Thumbnail from "../Thumbnail";
 import { Container, Row, Col } from "../Grid";
+import Button from "../Button"
 
 // Exporting both RecipeList and RecipeListItem from this file
 
@@ -14,21 +15,27 @@ export function ListItem({
   thumbnail = "https://placehold.it/300x300",
   title,
   description,
-  href
+  href,
+  onClick
 }) {
   return (
     <li className="list-group-item">
       <Container >
         <Row>
-        <Col size="xs-8 sm-9">
-
+        <Col size="xs-1 sm-1 md-3 lg-3 xl-3">
             <Thumbnail src={thumbnail} />
-        
             <h3>{title}</h3>
             <p>Description: {description}</p>
             <a rel="noreferrer noopener" target="_blank" href={href}>
               Go to recipe!
             </a>
+            <Button
+                        onClick={onClick}
+                        type="success"
+                        className="input-lg"
+                        >
+                          Save
+                        </Button>
           </Col>
         </Row>
       </Container>

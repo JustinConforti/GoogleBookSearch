@@ -3,7 +3,6 @@ const booksController = require("../../controllers/booksController");
 
 // Matches with "/api/booksearch"
 router.route("/")
-.get(bookController.searchAll)
 .post(booksController.create);
   
 

@@ -3,7 +3,8 @@
     border-style:solid;
     border-width: 1px;
     width: 85.5%;
-    margin: 0 auto;
+    margin-top:5%;
+    margin-left:7.5%;
 }
 
 .book-input {
@@ -14,9 +15,8 @@
 }
 
 .container-bookList {
-    float:right;
+    float:left;
     border-style:solid;
     border-width: 1px;
-    height:50%;
-    margin: 0 auto;
+    height:50%;    
 }

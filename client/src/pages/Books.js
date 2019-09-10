@@ -7,12 +7,16 @@ import { List, ListItem } from "../components/List";
 import { Link } from "react-router-dom";
 import "./style.css";
 import API from "../utils/API";
+import { throws } from "assert";
 
 
 class Books extends Component {
     state = {
         booksearch: "",
-        books: []
+        books: [],
+        title: "",
+        author: "",
+        description: ""
     };
 
 componentDidMount() {
@@ -40,6 +44,26 @@ componentDidMount() {
       .catch(err => console.log(err));
   };
 
+    saveClicked = event => {
+      event.preventDefault();
+      console.log(event.currentTarget.parentNode)
+      let savedTitle = (event.currentTarget.parentNode.querySelector('h3')) 
+      let savedAuthor = (event.currentTarget.parentNode.querySelector('h3')) 
+       let savedDesc = (event.currentTarget.parentNode.querySelector('p'))
+      this.setState({ title: savedTitle, author: savedAuthor, description: savedDesc })
+      this.changeSaved();
+    }
+
+    changeSaved = () => {
+      API.saveBook({
+        title: this.state.title,
+        author: this.state.title,
+        description: this.state.description
+    })
+    .then(this.setState({ title: "", author: "", description: "" }))
+    .catch(err => console.log(err));
+
+    }
 
   
   
@@ -73,12 +97,14 @@ componentDidMount() {
                   {this.state.books.map(book => {
                     return (
                       <Container containerClassName = "bookList">
+                        
                       <ListItem
                         key={book.volumeInfo.title}
                         title={book.volumeInfo.title}
                         href={book.volumeInfo.previewLink}
                         description={book.volumeInfo.description}
                         thumbnail={book.volumeInfo.imageLinks.smallThumbnail}
+                        onClick={this.saveClicked}
                       />
                     </Container>  
                     );
