@@ -2,10 +2,7 @@
   "name": "googlesearch",
   "version": "0.1.0",
   "private": true,
-  "proxy": {
-    "/api": {
-      "target": "http://localhost:5000"
-    },
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "axios": "^0.19.0",
     "react": "^16.9.0",
@@ -35,4 +32,4 @@
     ]
   }
 }
-}
+

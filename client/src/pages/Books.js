@@ -44,24 +44,37 @@ componentDidMount() {
       .catch(err => console.log(err));
   };
 
-    saveClicked = event => {
+    saveClicked = (event) => {
       event.preventDefault();
       console.log(event.currentTarget.parentNode)
-      let savedTitle = (event.currentTarget.parentNode.querySelector('h3')) 
-      let savedAuthor = (event.currentTarget.parentNode.querySelector('h3')) 
-       let savedDesc = (event.currentTarget.parentNode.querySelector('p'))
+      let savedTitle = (event.currentTarget.parentNode.querySelector('h3').innerHTML) 
+      let savedAuthor = (event.currentTarget.parentNode.querySelector('h3').innerHTML) 
+       let savedDesc = (event.currentTarget.parentNode.querySelector('p').innerHTML)
+      // savedTitle = JSON.stringify(savedTitle)
+      // savedAuthor = JSON.stringify(savedAuthor)
+      // savedDesc = JSON.stringify(savedDesc)
+       console.log(savedTitle, savedAuthor, savedDesc)
       this.setState({ title: savedTitle, author: savedAuthor, description: savedDesc })
+      if (this.state.title) {
       this.changeSaved();
-    }
+      } else {
+        setTimeout(() => {
+        this.changeSaved();
+      }, 8000);
+    };
+  }
 
     changeSaved = () => {
+      if (this.state.title) {
       API.saveBook({
         title: this.state.title,
         author: this.state.title,
         description: this.state.description
     })
-    .then(this.setState({ title: "", author: "", description: "" }))
-    .catch(err => console.log(err));
+    // .then(res => this.setState({ title: "", author: "", description: "" }))
+    .then(res => console.log(res.data))
+    .catch(err => console.log(err.response.data));
+  }
 
     }
 
