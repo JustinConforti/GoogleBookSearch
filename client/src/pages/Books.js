@@ -16,7 +16,8 @@ class Books extends Component {
         books: [],
         title: "",
         author: "",
-        description: ""
+        description: "",
+        thumbnail: ""
     };
 
 componentDidMount() {
@@ -50,11 +51,12 @@ componentDidMount() {
       let savedTitle = (event.currentTarget.parentNode.querySelector('h3').innerHTML) 
       let savedAuthor = (event.currentTarget.parentNode.querySelector('h3').innerHTML) 
        let savedDesc = (event.currentTarget.parentNode.querySelector('p').innerHTML)
+       let savedThumbnail = (event.currentTarget.parentNode.querySelector("img")) 
       // savedTitle = JSON.stringify(savedTitle)
       // savedAuthor = JSON.stringify(savedAuthor)
       // savedDesc = JSON.stringify(savedDesc)
-       console.log(savedTitle, savedAuthor, savedDesc)
-      this.setState({ title: savedTitle, author: savedAuthor, description: savedDesc })
+       console.log(savedThumbnail.src)
+      this.setState({ title: savedTitle, author: savedAuthor, description: savedDesc, thumbnail: savedThumbnail.src })
       if (this.state.title) {
       this.changeSaved();
       } else {
@@ -69,10 +71,11 @@ componentDidMount() {
       API.saveBook({
         title: this.state.title,
         author: this.state.title,
-        description: this.state.description
+        description: this.state.description,
+        thumbnail: this.state.thumbnail
     })
-    // .then(res => this.setState({ title: "", author: "", description: "" }))
     .then(res => console.log(res.data))
+    // .then(res => this.setState({ title: "", author: "", description: "" }))
     .catch(err => console.log(err.response.data));
   }
 

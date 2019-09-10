@@ -1,8 +1,4 @@
-div.thumbnail {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    padding-top: 100%;
-    width:60%;
+div.thumbnail.backgroundImage {
+    width:100%;
+    height: 100% !important;
   }
-  

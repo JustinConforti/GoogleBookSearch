@@ -22,12 +22,12 @@ export function ListItem({
     <li className="list-group-item">
       <Container >
         <Row>
-        <Col size="xs-1 sm-1 md-3 lg-3 xl-3">
-            <Thumbnail src={thumbnail} />
+          <Col size="" >
+            <img src={thumbnail} />
             <h3>{title}</h3>
             <p>Description: {description}</p>
             <a rel="noreferrer noopener" target="_blank" href={href}>
-              Go to recipe!
+              View
             </a>
             <Button
                         onClick={onClick}
