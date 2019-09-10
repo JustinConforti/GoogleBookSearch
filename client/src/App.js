@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./components/Nav";
 import Header from "./components/Header"
 import Books from "./pages/Books"
+import Saved from "./pages/Saved"
 
 
 
@@ -17,8 +18,8 @@ function App() {
         <Switch>
           <Route exact path="/" component={Books} />
           <Route exact path="/books" component={Books} />
-          {/* <Route exact path="/books/:id" component={Detail} />
-          <Route component={NoMatch} /> */}
+          <Route exact path="/saved" component={Saved} />
+          {/* <Route component={NoMatch} /> } */}
         </Switch>
       </div>
     </Router>
