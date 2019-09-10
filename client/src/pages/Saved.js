@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import Jumbotron from "../components/Jumbotron"
-import Button from "../components/Button"
+import DeleteBtn from "../components/DeleteBtn"
 import { Col, Row, Container } from "../components/Grid";
-import { Input, TextArea, FormBtn } from "../components/Form";
 import { List, ListItem } from "../components/List";
 import { Link } from "react-router-dom";
 import "./style.css";
@@ -19,6 +17,11 @@ class Saved extends Component {
         .then(res => this.setState({ books: res.data }))
         .catch(err => console.log(err.response.data));
     }
+    deleteBook = id => {
+      API.deleteBook(id)
+        .then(res => this.componentDidMount())
+        .catch(err => console.log(err));
+    };
 
     
   render() {
@@ -33,21 +36,39 @@ class Saved extends Component {
               {this.state.books.map(books => {
                 return (
                   <Container containerClassName = "bookList">
-                    
-                    <h1>{books.title}</h1>
-                    <h1>{books.title}</h1>
+                    <div className ="thumbnail">
+                    <img src ={books.thumbnail} />
+                    </div>
+                    <div className = "content">
+                    <h1>Title: {books.title}</h1>
+                    <h1>Author: {books.author}</h1>
+                    <div className ="plot">
                     <p>{books.description}</p>
-            
+                    </div>
+                  </div>
+                  <form action = {books.href} className="book-link" >
+                  <button
+            onClick= {books.href}
+            type="success"
+            className="input-lg"
+             >
+              View
+          </button>
+          </form>
+          <DeleteBtn onClick={() => this.deleteBook(books._id)} />
+          <Row>
+          <Col size="md-12">
+            <Link to="/">← Back to Book Search</Link>
+          </Col>
+        </Row>
                 </Container>  
+                
                 );
+                
               })}
             </List>
           )}
-        <Row>
-          <Col size="md-2">
-            <Link to="/">← Back to Authors</Link>
-          </Col>
-        </Row>
+        
       </Container>
     );
   }

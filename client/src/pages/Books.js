@@ -17,7 +17,8 @@ class Books extends Component {
         title: "",
         author: "",
         description: "",
-        thumbnail: ""
+        thumbnail: "",
+        href: ""
     };
 
 componentDidMount() {
@@ -40,8 +41,8 @@ componentDidMount() {
     // When the form is submitted, prevent its default behavior, get books and update the books state
     event.preventDefault();
     API.searchAll(this.state.booksearch)
-     .then(res => this.setState({ books: res.data.items }))
-      //  .then(res => console.log(res.data.items))
+      .then(res => this.setState({ books: res.data.items }))
+      // .then(res => console.log(res.data.items))
       .catch(err => console.log(err));
   };
 
@@ -49,14 +50,12 @@ componentDidMount() {
       event.preventDefault();
       console.log(event.currentTarget.parentNode)
       let savedTitle = (event.currentTarget.parentNode.querySelector('h3').innerHTML) 
-      let savedAuthor = (event.currentTarget.parentNode.querySelector('h3').innerHTML) 
-       let savedDesc = (event.currentTarget.parentNode.querySelector('p').innerHTML)
-       let savedThumbnail = (event.currentTarget.parentNode.querySelector("img")) 
-      // savedTitle = JSON.stringify(savedTitle)
-      // savedAuthor = JSON.stringify(savedAuthor)
-      // savedDesc = JSON.stringify(savedDesc)
-       console.log(savedThumbnail.src)
-      this.setState({ title: savedTitle, author: savedAuthor, description: savedDesc, thumbnail: savedThumbnail.src })
+      let savedAuthor = (event.currentTarget.parentNode.querySelector('h2').innerHTML) 
+      let savedDesc = (event.currentTarget.parentNode.querySelector('p').innerHTML)
+      let savedThumbnail = (event.currentTarget.parentNode.querySelector("img")) 
+      let savedHref = (event.currentTarget.parentNode.querySelector("a").href)
+       console.log(savedHref)
+      this.setState({ title: savedTitle, author: savedAuthor, description: savedDesc, thumbnail: savedThumbnail.src, href: savedHref })
       if (this.state.title) {
       this.changeSaved();
       } else {
@@ -70,9 +69,10 @@ componentDidMount() {
       if (this.state.title) {
       API.saveBook({
         title: this.state.title,
-        author: this.state.title,
+        author: this.state.author,
         description: this.state.description,
-        thumbnail: this.state.thumbnail
+        thumbnail: this.state.thumbnail,
+        href: this.state.href
     })
     .then(res => console.log(res.data))
     // .then(res => this.setState({ title: "", author: "", description: "" }))
@@ -88,7 +88,7 @@ componentDidMount() {
       <div>
       <Container containerClassName="booksearch">
         <Col size="md-6">
-        Book Search
+        <h3 className="book-h3">Book Search: Enter a title here</h3>
         <Input
         value={this.state.booksearch}
         onChange={this.handleInputChange}
@@ -99,14 +99,14 @@ componentDidMount() {
          <Button
             onClick={this.handleFormSubmit}
             type="success"
-            className="input-lg"
+            className="search-button"
              >
               Search
           </Button>
         </Col>
       </Container >
               {!this.state.books.length ? (
-                <h1 className="text-center">Search a book to display their matches</h1>
+                <h1 className="text-center" style={{color: "white"}}>Search a book to display their matches</h1>
               ) : (
                 <List>
                
@@ -117,6 +117,7 @@ componentDidMount() {
                       <ListItem
                         key={book.volumeInfo.title}
                         title={book.volumeInfo.title}
+                        author={book.volumeInfo.authors}
                         href={book.volumeInfo.previewLink}
                         description={book.volumeInfo.description}
                         thumbnail={book.volumeInfo.imageLinks.smallThumbnail}

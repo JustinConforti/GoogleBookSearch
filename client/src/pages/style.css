@@ -1,12 +1,23 @@
-
+body {
+    background-image: url("http://getwallpapers.com/wallpaper/full/8/7/6/888655-download-free-library-background-images-1920x1200.jpg")
+}
 .container-booksearch {
     border-style:solid;
     border-width: 1px;
     width: 85.5%;
     margin-top:5%;
     margin-left:7.5%;
+    background-color:grey;
 }
 
+.book-h3 {
+    margin-left: 5%;
+}
+
+.search-button {
+    margin-left:5%;
+    margin-bottom:2%;
+}
 .book-input {
     width: 50%;
     margin-bottom:5%;
@@ -15,8 +26,29 @@
 }
 
 .container-bookList {
+    background-color:grey;
+    margin-top:3%;
     float:left;
     border-style:solid;
-    border-width: 1px;
-    height:50%;    
+    border-width: 3px;
+    height:40%;    
+    width:75%;
+}
+.thumbnail {
+    margin-top: 3%;
+    margin-left: 5%;
+    float:left;
+}
+.content {
+    margin-bottom: 5%;
+    margin-left: 20%;
+}
+
+.plot {
+    margin:0 auto;
+    width: 80%;
+}
+
+.book-link {
+margin-left: 90%;
 }

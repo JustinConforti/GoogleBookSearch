@@ -16,6 +16,7 @@ export function ListItem({
   title,
   description,
   href,
+  author,
   onClick
 }) {
   return (
@@ -25,10 +26,20 @@ export function ListItem({
           <Col size="" >
             <img src={thumbnail} />
             <h3>{title}</h3>
+            <h2>{author}</h2>
             <p>Description: {description}</p>
-            <a rel="noreferrer noopener" target="_blank" href={href}>
+
+
+
+            <form action = {href} className="searchbook-link" >
+                  <button
+            onClick= {href}
+            type="success"
+            className="input-lg"
+             >
               View
-            </a>
+          </button>
+         
             <Button
                         onClick={onClick}
                         type="success"
@@ -36,6 +47,7 @@ export function ListItem({
                         >
                           Save
                         </Button>
+                        </form>
           </Col>
         </Row>
       </Container>
