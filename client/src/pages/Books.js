@@ -38,50 +38,21 @@ componentDidMount() {
 
       
   handleFormSubmit = event => {
-    // When the form is submitted, prevent its default behavior, get books and update the books state
     event.preventDefault();
+    // get book from api
     API.searchAll(this.state.booksearch)
-      .then(res => this.setState({ books: res.data.items }))
-      // .then(res => console.log(res.data.items))
+    // set book to state so they can render
+      .then(({ data: { items }}) => 
+        this.setState({ books: items })
+      )
       .catch(err => console.log(err));
+
   };
 
-    saveClicked = (event) => {
-      event.preventDefault();
-      console.log(event.currentTarget.parentNode)
-      let savedTitle = (event.currentTarget.parentNode.querySelector('h3').innerHTML) 
-      let savedAuthor = (event.currentTarget.parentNode.querySelector('h2').innerHTML) 
-      let savedDesc = (event.currentTarget.parentNode.querySelector('p').innerHTML)
-      let savedThumbnail = (event.currentTarget.parentNode.querySelector("img")) 
-      let savedHref = (event.currentTarget.parentNode.querySelector("a").href)
-       console.log(savedHref)
-      this.setState({ title: savedTitle, author: savedAuthor, description: savedDesc, thumbnail: savedThumbnail.src, href: savedHref })
-      if (this.state.title) {
-      this.changeSaved();
-      } else {
-        setTimeout(() => {
-        this.changeSaved();
-      }, 8000);
-    };
-  }
-
-    changeSaved = () => {
-      if (this.state.title) {
-      API.saveBook({
-        title: this.state.title,
-        author: this.state.author,
-        description: this.state.description,
-        thumbnail: this.state.thumbnail,
-        href: this.state.href
-    })
+  // book => saves book to API
+  onClickSave = book => API.saveBook(book)
     .then(res => console.log(res.data))
-    // .then(res => this.setState({ title: "", author: "", description: "" }))
     .catch(err => console.log(err.response.data));
-  }
-
-    }
-
-  
   
   render() {
     return (
@@ -109,23 +80,19 @@ componentDidMount() {
                 <h1 className="text-center" style={{color: "white"}}>Search a book to display their matches</h1>
               ) : (
                 <List>
-               
-                  {this.state.books.map(book => {
-                    return (
-                      <Container containerClassName = "bookList">
-                        
+      
+                  {this.state.books.map((book, index) => (
+                    <Container containerClassName = "bookList" key={index}>
                       <ListItem
-                        key={book.volumeInfo.title}
                         title={book.volumeInfo.title}
-                        author={book.volumeInfo.authors}
+                        author={book.volumeInfo.authors[0]}
                         href={book.volumeInfo.previewLink}
                         description={book.volumeInfo.description}
                         thumbnail={book.volumeInfo.imageLinks.smallThumbnail}
-                        onClick={this.saveClicked}
+                        onClick={this.onClickSaved}
                       />
                     </Container>  
-                    );
-                  })}
+                  ))}
                 </List>
               )}
   

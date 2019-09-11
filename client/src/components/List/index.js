@@ -19,6 +19,7 @@ export function ListItem({
   author,
   onClick
 }) {
+  console.log(author)
   return (
     <li className="list-group-item">
       <Container >
@@ -31,26 +32,36 @@ export function ListItem({
 
 
 
-            <form action = {href} className="searchbook-link" >
-                  <button
-            onClick= {href}
-            type="success"
-            className="input-lg"
-             >
-              View
-          </button>
-         
-            <Button
-                        onClick={onClick}
-                        type="success"
-                        className="input-lg"
-                        >
-                          Save
-                        </Button>
-                        </form>
+            <form action={href} className="searchbook-link" >
+              <button
+                onClick= {href}
+                type="success"
+                className="input-lg"
+                >
+                  View
+              </button>
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  onClick({
+                  thumbnail,
+                  title,
+                  description,
+                  href,
+                  author
+                })
+              }
+              }
+                type="success"
+                className="input-lg"
+                >
+                  Save
+              </Button>
+            </form>
           </Col>
         </Row>
       </Container>
     </li>
   );
 }
+
